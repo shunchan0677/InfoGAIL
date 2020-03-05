@@ -6,7 +6,7 @@ SHARED_DIR=/home/autoware/shared_dir
 HOST_DIR=/home/$USER/shared_dir
 
 
-nvidia-docker run \
+docker run \
     -it --rm \
     --volume=$XSOCK:$XSOCK:rw \
     --volume=$XAUTH:$XAUTH:rw \
@@ -18,6 +18,9 @@ nvidia-docker run \
     --privileged -v /dev/bus/usb:/dev/bus/usb \
     --env="DISPLAY=$DISPLAY" \
     --env="QT_X11_NO_MITSHM=1" \
+    -v /usr/lib/nvidia-418:/usr/lib/nvidia-418 \
+    -v /usr/lib32/nvidia-418:/usr/lib32/nvidia-418 \
+    --device /dev/dri \
     --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
     --runtime=nvidia \
     infogail
