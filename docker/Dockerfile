@@ -2,13 +2,14 @@ FROM nvidia/cuda:8.0-devel-ubuntu16.04
 # Shunya SEIYA <shunya.seiya@tier4.jp>
 RUN apt-get update
 RUN apt-get install python -y
-RUN apt-get install python3 -y
 
 RUN  apt install python-pip -y
-RUN  apt install python3-pip -y
 
-RUN pip3 install tensorflow-gpu==0.12.1
-RUN pip3 install keras==1.2.2
+RUN pip install numpy==1.11.0
+RUN pip install scipy==0.14
+RUN pip install tensorflow==0.12.1
+RUN pip install keras==1.2.2
+RUN pip install pillow==5.0.0
 RUN apt-get install xautomation -y
 
 RUN apt-get install libplib-dev -y
@@ -31,6 +32,18 @@ ENV NVIDIA_DRIVER_CAPABILITIES ${NVIDIA_DRIVER_CAPABILITIES:+$NVIDIA_DRIVER_CAPA
 ENV PATH "/usr/lib/nvidia-418/bin":${PATH}
 ENV LD_LIBRARY_PATH "/usr/lib/nvidia-418:/usr/lib32/nvidia-418":${LD_LIBRARY_PATH}
 
+RUN cp -r InfoGAIL/modified_tracks/* /usr/local/share/games/torcs/tracks/road
+RUN rm -rf .torcs
+RUN cp -r InfoGAIL/torcs_config_ai_0 .torcs
 
+RUN pip install --upgrade pip
+RUN pip install mock
+RUN pip install gym
+RUN pip install matplotlib
+RUN apt install python-tk -y
+RUN  apt-get install  libopencv-dev -y
+RUN pip install opencv-python
+RUN pip install h5py
+RUN apt install gedit -y
 # Default CMD
 CMD ["/bin/bash"]

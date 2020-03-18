@@ -2,7 +2,7 @@
 
 XSOCK=/tmp/.X11-unix
 XAUTH=/home/$USER/.Xauthority
-SHARED_DIR=/home/autoware/shared_dir
+SHARED_DIR=/home
 HOST_DIR=/home/$USER/shared_dir
 
 
